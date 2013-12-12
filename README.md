@@ -8,11 +8,11 @@ spring-social provider module for evernote API
 
 - more java friendly programming model
 
--- null safe collections
+ - null safe collections
 
--- interface programming model
+ - interface programming model
 
--- unchecked exception
+ - unchecked exception
 
 
 # status
