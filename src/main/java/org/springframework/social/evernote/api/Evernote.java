@@ -1,9 +1,7 @@
 package org.springframework.social.evernote.api;
 
-import com.evernote.clients.BusinessNoteStoreClient;
-import com.evernote.clients.LinkedNoteStoreClient;
-import com.evernote.clients.NoteStoreClient;
-import com.evernote.clients.UserStoreClient;
+import com.evernote.clients.*;
+import com.evernote.edam.type.LinkedNotebook;
 import org.springframework.social.ApiBinding;
 
 /**
@@ -11,19 +9,22 @@ import org.springframework.social.ApiBinding;
  */
 public interface Evernote extends ApiBinding {
 
-	BusinessNoteStoreClientOperations businessNoteStoreClientOperations();
+	BusinessNoteStoreOperations businessNoteStoreClientOperations();
 
-	LinkedNoteStoreClientOperations linkedNoteStoreClientOperations();
+	LinkedNoteStoreOperations linkedNoteStoreClientOperations(LinkedNotebook linkedNotebook);
 
-	NoteStoreClientOperations noteStoreClientOperations();
+	NoteStoreOperations noteStoreClientOperations();
 
-	UserStoreClientOperations userStoreClientOperations();
+	UserStoreOperations userStoreClientOperations();
 
-	// just temp...
+
+	// to retrieve actual store client instances
+
+	ClientFactory clientFactory();
 
 	BusinessNoteStoreClient businessNoteStoreClient();
 
-	LinkedNoteStoreClient linkedNoteStoreClient();
+	LinkedNoteStoreClient linkedNoteStoreClient(LinkedNotebook linkedNotebook);
 
 	NoteStoreClient noteStoreClient();
 

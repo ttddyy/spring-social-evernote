@@ -3,12 +3,12 @@ package org.springframework.social.evernote.api.Impl;
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;
 import com.evernote.clients.*;
-import com.evernote.edam.error.EDAMSystemException;
-import com.evernote.edam.error.EDAMUserException;
-import com.evernote.thrift.TException;
+import com.evernote.edam.type.LinkedNotebook;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.social.evernote.api.*;
 import org.springframework.social.evernote.connect.EvernoteOAuthToken;
-import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
+
+import static org.springframework.social.evernote.api.EvernoteExceptionUtils.Operation;
 
 /**
  * TODO: impl
@@ -39,52 +39,86 @@ public class EvernoteTemplate implements Evernote {
 	}
 
 	@Override
-	public BusinessNoteStoreClientOperations businessNoteStoreClientOperations() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public ClientFactory clientFactory() {
+		return this.clientFactory;
 	}
 
 	@Override
-	public LinkedNoteStoreClientOperations linkedNoteStoreClientOperations() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public BusinessNoteStoreClient businessNoteStoreClient() throws EvernoteException {
+		return EvernoteExceptionUtils.wrap(new Operation<BusinessNoteStoreClient>() {
+			@Override
+			public BusinessNoteStoreClient execute() throws Exception {
+				return clientFactory.createBusinessNoteStoreClient();
+			}
+		});
+
 	}
 
 	@Override
-	public NoteStoreClientOperations noteStoreClientOperations() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public LinkedNoteStoreClient linkedNoteStoreClient(final LinkedNotebook linkedNotebook) throws EvernoteException {
+		return EvernoteExceptionUtils.wrap(new Operation<LinkedNoteStoreClient>() {
+			@Override
+			public LinkedNoteStoreClient execute() throws Exception {
+				return clientFactory.createLinkedNoteStoreClient(linkedNotebook);
+			}
+		});
 	}
 
 	@Override
-	public UserStoreClientOperations userStoreClientOperations() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public NoteStoreClient noteStoreClient() throws EvernoteException {
+		return EvernoteExceptionUtils.wrap(new Operation<NoteStoreClient>() {
+			@Override
+			public NoteStoreClient execute() throws Exception {
+				return clientFactory.createNoteStoreClient();
+			}
+		});
 	}
 
 	@Override
-	public BusinessNoteStoreClient businessNoteStoreClient() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public UserStoreClient userStoreClient() throws EvernoteException {
+		return EvernoteExceptionUtils.wrap(new Operation<UserStoreClient>() {
+			@Override
+			public UserStoreClient execute() throws Exception {
+				return clientFactory.createUserStoreClient();
+			}
+		});
+	}
+
+
+	@Override
+	public BusinessNoteStoreOperations businessNoteStoreClientOperations() {
+		BusinessNoteStoreClient businessNoteStoreClient = businessNoteStoreClient();
+		return createStoreClientProxy(businessNoteStoreClient, BusinessNoteStoreOperations.class);
 	}
 
 	@Override
-	public LinkedNoteStoreClient linkedNoteStoreClient() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public LinkedNoteStoreOperations linkedNoteStoreClientOperations(LinkedNotebook linkedNotebook) {
+		LinkedNoteStoreClient linkedNoteStoreClient = linkedNoteStoreClient(linkedNotebook);
+		return createStoreClientProxy(linkedNoteStoreClient, LinkedNoteStoreOperations.class);
 	}
 
 	@Override
-	public NoteStoreClient noteStoreClient() {
-		// TODO: wrap
-		try {
-			return this.clientFactory.createNoteStoreClient();
-		} catch (Exception e) {
-			return null;
-		}
+	public NoteStoreOperations noteStoreClientOperations() {
+		NoteStoreClient noteStoreClient = noteStoreClient();
+		return createStoreClientProxy(noteStoreClient, NoteStoreOperations.class);
 	}
 
 	@Override
-	public UserStoreClient userStoreClient() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	public UserStoreOperations userStoreClientOperations() throws EvernoteException {
+		UserStoreClient userStoreClient = userStoreClient();
+		return createStoreClientProxy(userStoreClient, UserStoreOperations.class);
+	}
+
+	private <T> T createStoreClientProxy(Object storeClient, Class<T> operationClass) {
+		ProxyFactory proxyFactory = new ProxyFactory(storeClient);
+		proxyFactory.addInterface(operationClass);
+		proxyFactory.addInterface(StoreClientHolder.class);
+		proxyFactory.addAdvice(new ClientStoreMethodInterceptor());
+		return (T) proxyFactory.getProxy();
 	}
 
 	@Override
 	public boolean isAuthorized() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return true;
 	}
 }
