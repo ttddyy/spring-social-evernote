@@ -19,6 +19,8 @@ spring-social provider module for evernote API
 
 working on implementation.
 
+## Continuous Integration
 
+- [BuildHive Jenkins](https://buildhive.cloudbees.com/job/ttddyy/job/spring-social-evernote/)
 
 
