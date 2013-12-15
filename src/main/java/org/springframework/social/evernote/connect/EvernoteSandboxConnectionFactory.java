@@ -15,11 +15,4 @@ public class EvernoteSandboxConnectionFactory extends EvernoteConnectionFactory 
 		super(consumerKey, consumerSecret, EvernoteService.SANDBOX, providerId);
 	}
 
-//    private EvernoteSandboxConnectionFactory(String consumerKey, String consumerSecret, EvernoteService evernoteService) {
-//        super(consumerKey, consumerSecret, evernoteService);
-//    }
-//
-//    private EvernoteSandboxConnectionFactory(String consumerKey, String consumerSecret, EvernoteService evernoteService, String providerId) {
-//        super(consumerKey, consumerSecret, evernoteService, providerId);
-//    }
 }
