@@ -22,5 +22,6 @@ working on implementation.
 ## Continuous Integration
 
 - [BuildHive Jenkins](https://buildhive.cloudbees.com/job/ttddyy/job/spring-social-evernote/)
+[![Build Status](https://buildhive.cloudbees.com/job/ttddyy/job/spring-social-evernote/badge/icon)](https://buildhive.cloudbees.com/job/ttddyy/job/spring-social-evernote/)
 
 
