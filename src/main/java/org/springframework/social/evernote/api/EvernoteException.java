@@ -6,6 +6,8 @@ import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
 
 /**
+ * Runtime exception that encapsulates typed exceptions from evernote sdk.
+ *
  * @author Tadaya Tsuyukubo
  */
 public class EvernoteException extends RuntimeException {
