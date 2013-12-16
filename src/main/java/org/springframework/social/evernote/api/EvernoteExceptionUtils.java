@@ -9,6 +9,12 @@ import com.evernote.edam.error.EDAMUserException;
  */
 public class EvernoteExceptionUtils {
 
+	/**
+	 * convert to {@link EvernoteException}
+	 *
+	 * @param ex original exception
+	 * @return converted exception
+	 */
 	public static EvernoteException convert(Exception ex) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(ex.getMessage());
@@ -36,6 +42,14 @@ public class EvernoteExceptionUtils {
 		return new EvernoteException(sb.toString(), ex);
 	}
 
+	/**
+	 * Execute the given operation and wrap the thrown exception to {@link EvernoteException}.
+	 *
+	 * @param operation a callback operation
+	 * @param <T>       operation return type
+	 * @return return from callback operation
+	 * @throws EvernoteException EvernoteException wrapping a thrown original exception
+	 */
 	public static <T> T wrap(Operation<T> operation) throws EvernoteException {
 		try {
 			return operation.execute();
@@ -44,6 +58,11 @@ public class EvernoteExceptionUtils {
 		}
 	}
 
+	/**
+	 * Callback interface for {@link EvernoteExceptionUtils#wrap(org.springframework.social.evernote.api.EvernoteExceptionUtils.Operation)}.
+	 *
+	 * @param <T>
+	 */
 	public static interface Operation<T> {
 		T execute() throws Exception;
 	}
