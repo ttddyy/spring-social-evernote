@@ -1,9 +1,6 @@
 package org.springframework.social.evernote.connect;
 
-import com.evernote.edam.error.EDAMSystemException;
-import com.evernote.edam.error.EDAMUserException;
 import com.evernote.edam.type.User;
-import com.evernote.thrift.TException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
@@ -26,29 +23,23 @@ public class EvernoteAdapter implements ApiAdapter<Evernote> {
 
 	@Override
 	public void setConnectionValues(Evernote evernote, ConnectionValues values) {
-		// TODO: impl
-//        evernote.userStoreClient().getUser().getId()  // provider user id
-//        evernote.userStoreClient().getUser().getUsername()  // display name
-
-//        values.setProviderUserId();
-//        values.setProfileUrl();  // null
-//        values.setDisplayName();
-//        values.setImageUrl();  // null
+		// this impl requires another call to server.
+		// TODO: get data from EvernoteAuthToken??
+		final User user = evernote.userStoreClientOperations().getUser();
+		values.setProviderUserId(String.valueOf(user.getId()));  // can get from EvernoteAuthToken
+		values.setDisplayName(user.getUsername());
+		values.setProfileUrl(null);
+		values.setImageUrl(null);
 	}
 
 	@Override
 	public UserProfile fetchUserProfile(Evernote evernote) {
-		// TODO: use wrapped operations
-		try {
-			final User user = evernote.userStoreClient().getUser();
-			return new UserProfileBuilder()
-					.setName(user.getName())
-					.setEmail(user.getEmail())
-					.setUsername(user.getUsername())
-					.build();
-		} catch (Exception e) {
-			return UserProfile.EMPTY;
-		}
+		final User user = evernote.userStoreClientOperations().getUser();
+		return new UserProfileBuilder()
+				.setName(user.getName())
+				.setEmail(user.getEmail())
+				.setUsername(user.getUsername())
+				.build();
 	}
 
 	@Override
