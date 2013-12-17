@@ -2,7 +2,6 @@ package org.springframework.social.evernote.api.Impl;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.social.evernote.api.EvernoteExceptionUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -21,12 +20,13 @@ public class ClientStoreMethodInterceptor implements MethodInterceptor {
 
 		// TODO: handle StoreClientHolder interface method
 
-		Object target = invocation.getThis();  // target client store instance
-		Class<?> targetClass = target.getClass();
-		Method invokedMethod = invocation.getMethod();  // invoked method in ~Operations
+		final Object target = invocation.getThis();  // target client store instance
+		final Class<?> targetClass = target.getClass();
+		final Method invokedMethod = invocation.getMethod();  // invoked method in ~Operations
 
 		// From invoked method in ~Operations, find corresponding method in actual ~StoreClient class
-		Method targetMethod = AopUtils.getMostSpecificMethod(invokedMethod, targetClass);
+		final Method targetMethod =
+				ReflectionUtils.findMethod(targetClass, invokedMethod.getName(), invokedMethod.getParameterTypes());
 
 		ReflectionUtils.makeAccessible(targetMethod);
 
