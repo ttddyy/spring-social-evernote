@@ -3,6 +3,7 @@ package org.springframework.social.evernote.api.Impl;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.social.evernote.api.EvernoteExceptionUtils;
+import org.springframework.social.evernote.api.StoreClientHolder;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
@@ -15,14 +16,19 @@ import java.lang.reflect.UndeclaredThrowableException;
  */
 public class ClientStoreMethodInterceptor implements MethodInterceptor {
 
+	private static Method GET_STORE_CLIENT_METHOD = ReflectionUtils.findMethod(StoreClientHolder.class, "getStoreClient");
+
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-
-		// TODO: handle StoreClientHolder interface method
 
 		final Object target = invocation.getThis();  // target client store instance
 		final Class<?> targetClass = target.getClass();
 		final Method invokedMethod = invocation.getMethod();  // invoked method in ~Operations
+
+		// for StoreClientHolder.getStoreClient()
+		if (GET_STORE_CLIENT_METHOD.equals(invokedMethod)) {
+			return target;  // return underlying store instance
+		}
 
 		// From invoked method in ~Operations, find corresponding method in actual ~StoreClient class
 		final Method targetMethod =
