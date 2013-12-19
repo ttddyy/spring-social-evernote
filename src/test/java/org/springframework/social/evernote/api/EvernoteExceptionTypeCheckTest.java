@@ -3,6 +3,7 @@ package org.springframework.social.evernote.api;
 import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
+import com.evernote.thrift.TException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,23 +25,26 @@ public class EvernoteExceptionTypeCheckTest {
 	private boolean isEDAMUserException;
 	private boolean isEDAMSystemException;
 	private boolean isEDAMNotFoundException;
+	private boolean isTException;
 
 	@Parameters
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][]{
-				// exception, isEDAMUserException, isEDAMSystemException, isEDAMNotFoundException
-				{new EDAMUserException(), true, false, false},
-				{new EDAMSystemException(), false, true, false},
-				{new EDAMNotFoundException(), false, false, true},
-				{new RuntimeException(), false, false, false},
+				// exception, isEDAMUserException, isEDAMSystemException, isEDAMNotFoundException, isTException
+				{new EDAMUserException(), true, false, false, false},
+				{new EDAMSystemException(), false, true, false, false},
+				{new EDAMNotFoundException(), false, false, true, false},
+				{new TException(), false, false, false, true},
+				{new RuntimeException(), false, false, false, false},
 		});
 	}
 
-	public EvernoteExceptionTypeCheckTest(Throwable exception, boolean EDAMUserException, boolean EDAMSystemException, boolean EDAMNotFoundException) {
+	public EvernoteExceptionTypeCheckTest(Throwable exception, boolean EDAMUserException, boolean EDAMSystemException, boolean EDAMNotFoundException, boolean isTException) {
 		this.exception = exception;
-		isEDAMUserException = EDAMUserException;
-		isEDAMSystemException = EDAMSystemException;
-		isEDAMNotFoundException = EDAMNotFoundException;
+		this.isEDAMUserException = EDAMUserException;
+		this.isEDAMSystemException = EDAMSystemException;
+		this.isEDAMNotFoundException = EDAMNotFoundException;
+		this.isTException = isTException;
 	}
 
 	@Test
@@ -49,6 +53,7 @@ public class EvernoteExceptionTypeCheckTest {
 		assertThat(ex.isEDAMUserException(), is(isEDAMUserException));
 		assertThat(ex.isEDAMSystemException(), is(isEDAMSystemException));
 		assertThat(ex.isEDAMNotFoundException(), is(isEDAMNotFoundException));
+		assertThat(ex.isTException(), is(isTException));
 		assertThat(ex.getCause(), is(exception));
 	}
 }

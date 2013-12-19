@@ -3,6 +3,7 @@ package org.springframework.social.evernote.api;
 import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
+import com.evernote.thrift.TException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,6 +29,7 @@ public class EvernoteExceptionUtilsConvertTest {
 				{new EDAMUserException()},
 				{new EDAMSystemException()},
 				{new EDAMNotFoundException()},
+				{new TException()},
 				{new RuntimeException()},
 		});
 	}

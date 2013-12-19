@@ -4,6 +4,7 @@ import com.evernote.edam.error.EDAMErrorCode;
 import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
+import com.evernote.thrift.TException;
 
 /**
  * Runtime exception that encapsulates typed exceptions from evernote sdk.
@@ -26,6 +27,10 @@ public class EvernoteException extends RuntimeException {
 
 	public boolean isEDAMNotFoundException() {
 		return getCause() instanceof EDAMNotFoundException;
+	}
+
+	public boolean isTException() {
+		return getCause() instanceof TException;
 	}
 
 	public EDAMErrorCode getEDAMErrorCode() {
