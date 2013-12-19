@@ -49,6 +49,7 @@ public class ClientStoreMethodInterceptor implements MethodInterceptor {
 
 	private static Throwable getOriginalException(Throwable e) {
 		Throwable original = e;
+		// for checked exception, it is wrapped by UndeclaredThrowableException.
 		if (e instanceof UndeclaredThrowableException) {
 			original = getOriginalException(e.getCause());
 		}
