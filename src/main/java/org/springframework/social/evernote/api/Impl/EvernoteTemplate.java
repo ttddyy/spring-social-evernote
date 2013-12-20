@@ -86,30 +86,30 @@ public class EvernoteTemplate implements Evernote {
 
 
 	@Override
-	public BusinessNoteStoreOperations businessNoteStoreClientOperations() {
+	public BusinessNoteStoreOperations businessNoteStoreOperations() {
 		BusinessNoteStoreClient businessNoteStoreClient = businessNoteStoreClient();
-		return createStoreClientProxy(businessNoteStoreClient, BusinessNoteStoreOperations.class);
+		return createOperationsProxy(BusinessNoteStoreOperations.class, businessNoteStoreClient);
 	}
 
 	@Override
-	public LinkedNoteStoreOperations linkedNoteStoreClientOperations(LinkedNotebook linkedNotebook) {
+	public LinkedNoteStoreOperations linkedNoteStoreOperations(LinkedNotebook linkedNotebook) {
 		LinkedNoteStoreClient linkedNoteStoreClient = linkedNoteStoreClient(linkedNotebook);
-		return createStoreClientProxy(linkedNoteStoreClient, LinkedNoteStoreOperations.class);
+		return createOperationsProxy(LinkedNoteStoreOperations.class, linkedNoteStoreClient);
 	}
 
 	@Override
-	public NoteStoreOperations noteStoreClientOperations() {
+	public NoteStoreOperations noteStoreOperations() {
 		NoteStoreClient noteStoreClient = noteStoreClient();
-		return createStoreClientProxy(noteStoreClient, NoteStoreOperations.class);
+		return createOperationsProxy(NoteStoreOperations.class, noteStoreClient);
 	}
 
 	@Override
-	public UserStoreOperations userStoreClientOperations() throws EvernoteException {
+	public UserStoreOperations userStoreOperations() throws EvernoteException {
 		UserStoreClient userStoreClient = userStoreClient();
-		return createStoreClientProxy(userStoreClient, UserStoreOperations.class);
+		return createOperationsProxy(UserStoreOperations.class, userStoreClient);
 	}
 
-	private <T> T createStoreClientProxy(Object storeClient, Class<T> operationClass) {
+	private <T> T createOperationsProxy(Class<T> operationClass, Object storeClient) {
 		ProxyFactory proxyFactory = new ProxyFactory(storeClient);
 		proxyFactory.addInterface(operationClass);
 		proxyFactory.addInterface(StoreClientHolder.class);

@@ -9,13 +9,13 @@ import org.springframework.social.ApiBinding;
  */
 public interface Evernote extends ApiBinding {
 
-	BusinessNoteStoreOperations businessNoteStoreClientOperations();
+	BusinessNoteStoreOperations businessNoteStoreOperations();
 
-	LinkedNoteStoreOperations linkedNoteStoreClientOperations(LinkedNotebook linkedNotebook);
+	LinkedNoteStoreOperations linkedNoteStoreOperations(LinkedNotebook linkedNotebook);
 
-	NoteStoreOperations noteStoreClientOperations();
+	NoteStoreOperations noteStoreOperations();
 
-	UserStoreOperations userStoreClientOperations();
+	UserStoreOperations userStoreOperations();
 
 
 	/**

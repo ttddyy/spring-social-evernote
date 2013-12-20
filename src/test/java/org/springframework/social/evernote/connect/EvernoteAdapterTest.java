@@ -53,7 +53,7 @@ public class EvernoteAdapterTest {
 		user.setId(100);
 		user.setUsername("foo");
 
-		when(evernote.userStoreClientOperations()).thenReturn(userStoreOperations);
+		when(evernote.userStoreOperations()).thenReturn(userStoreOperations);
 		when(userStoreOperations.getUser()).thenReturn(user);
 
 		EvernoteAdapter adapter = new EvernoteAdapter();
@@ -75,7 +75,7 @@ public class EvernoteAdapterTest {
 		user.setUsername("FOO");
 		user.setEmail("foo@foo.com");
 
-		when(evernote.userStoreClientOperations()).thenReturn(userStoreOperations);
+		when(evernote.userStoreOperations()).thenReturn(userStoreOperations);
 		when(userStoreOperations.getUser()).thenReturn(user);
 
 		EvernoteAdapter adapter = new EvernoteAdapter();

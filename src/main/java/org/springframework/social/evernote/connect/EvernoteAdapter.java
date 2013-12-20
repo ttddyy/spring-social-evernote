@@ -25,7 +25,7 @@ public class EvernoteAdapter implements ApiAdapter<Evernote> {
 	public void setConnectionValues(Evernote evernote, ConnectionValues values) {
 		// this impl requires another call to server.
 		// TODO: get data from EvernoteAuthToken??
-		final User user = evernote.userStoreClientOperations().getUser();
+		final User user = evernote.userStoreOperations().getUser();
 		values.setProviderUserId(String.valueOf(user.getId()));  // can get from EvernoteAuthToken
 		values.setDisplayName(user.getUsername());
 		values.setProfileUrl(null);
@@ -34,7 +34,7 @@ public class EvernoteAdapter implements ApiAdapter<Evernote> {
 
 	@Override
 	public UserProfile fetchUserProfile(Evernote evernote) {
-		final User user = evernote.userStoreClientOperations().getUser();
+		final User user = evernote.userStoreOperations().getUser();
 		return new UserProfileBuilder()
 				.setName(user.getName())
 				.setEmail(user.getEmail())

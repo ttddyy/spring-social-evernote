@@ -41,7 +41,7 @@ public class EvernoteTemplateOpertaionsTest {
 		EvernoteTemplate spy = spy(template);  // partial mock
 		doReturn(businessNoteStoreClient).when(spy).businessNoteStoreClient();
 
-		BusinessNoteStoreOperations result = spy.businessNoteStoreClientOperations();
+		BusinessNoteStoreOperations result = spy.businessNoteStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
 		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
@@ -59,7 +59,7 @@ public class EvernoteTemplateOpertaionsTest {
 		EvernoteTemplate spy = spy(template);  // partial mock
 		doReturn(linkedNoteStoreClient).when(spy).linkedNoteStoreClient(argThat(any(LinkedNotebook.class)));
 
-		LinkedNoteStoreOperations result = spy.linkedNoteStoreClientOperations(mock(LinkedNotebook.class));
+		LinkedNoteStoreOperations result = spy.linkedNoteStoreOperations(mock(LinkedNotebook.class));
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
 		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
@@ -77,7 +77,7 @@ public class EvernoteTemplateOpertaionsTest {
 		EvernoteTemplate spy = spy(template);  // partial mock
 		doReturn(noteStoreClient).when(spy).noteStoreClient();
 
-		NoteStoreOperations result = spy.noteStoreClientOperations();
+		NoteStoreOperations result = spy.noteStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
 		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
@@ -95,7 +95,7 @@ public class EvernoteTemplateOpertaionsTest {
 		EvernoteTemplate spy = spy(template);  // partial mock
 		doReturn(userStoreClient).when(spy).userStoreClient();
 
-		UserStoreOperations result = spy.userStoreClientOperations();
+		UserStoreOperations result = spy.userStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
 		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
