@@ -11,7 +11,7 @@ import org.springframework.social.evernote.connect.EvernoteOAuthToken;
 import static org.springframework.social.evernote.api.EvernoteExceptionUtils.Operation;
 
 /**
- * TODO: impl
+ * API Binding implementation for {@link Evernote}.
  *
  * @author Tadaya Tsuyukubo
  */
@@ -114,6 +114,7 @@ public class EvernoteTemplate implements Evernote {
 		proxyFactory.addInterface(operationClass);
 		proxyFactory.addInterface(StoreClientHolder.class);
 		proxyFactory.addAdvice(new ClientStoreMethodInterceptor());
+		proxyFactory.addAdvice(new ThriftWrapperInterceptor());
 		return (T) proxyFactory.getProxy();
 	}
 
