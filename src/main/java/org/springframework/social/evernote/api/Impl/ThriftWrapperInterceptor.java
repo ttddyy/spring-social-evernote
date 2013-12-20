@@ -8,7 +8,7 @@ import org.aopalliance.intercept.MethodInvocation;
  *
  * @author Tadaya Tsuyukubo
  */
-public class NullSafeThriftCollectionInterceptor implements MethodInterceptor {
+public class ThriftWrapperInterceptor implements MethodInterceptor {
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		return ThriftWrapper.makeNullSafe(invocation.proceed());
