@@ -12,10 +12,19 @@ import java.util.List;
  */
 public interface BusinessNoteStoreOperations extends LinkedNoteStoreOperations {
 
+	/**
+	 * Equivalent to {@link com.evernote.clients.BusinessNoteStoreClient#createNotebook(com.evernote.edam.type.Notebook)}.
+	 *
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.BusinessNoteStoreClient#createNotebook(com.evernote.edam.type.Notebook)
+	 */
 	LinkedNotebook createNotebook(Notebook notebook) throws EvernoteException;
 
 	/**
-	 * Helper method to list business notebooks synchronously
+	 * Equivalent to {@link com.evernote.clients.BusinessNoteStoreClient#listNotebooks()}.
+	 *
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.BusinessNoteStoreClient#listNotebooks()
 	 */
 	List<LinkedNotebook> listNotebooks() throws EvernoteException;
 

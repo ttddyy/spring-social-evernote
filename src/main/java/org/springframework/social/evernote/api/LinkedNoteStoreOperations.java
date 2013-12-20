@@ -17,41 +17,34 @@ public interface LinkedNoteStoreOperations {
 	NoteStoreClient getClient();
 
 	/**
-	 * Helper method to create a note in a linked notebook
+	 * Equivalent to {@link com.evernote.clients.LinkedNoteStoreClient#createNote(com.evernote.edam.type.Note, com.evernote.edam.type.LinkedNotebook)}.
 	 *
-	 * @param note
-	 * @param linkedNotebook
-	 * @return
-	 * @throws com.evernote.edam.error.EDAMUserException
-	 *
-	 * @throws com.evernote.edam.error.EDAMSystemException
-	 *
-	 * @throws com.evernote.thrift.TException
-	 * @throws com.evernote.edam.error.EDAMNotFoundException
-	 *
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.LinkedNoteStoreClient#createNote(com.evernote.edam.type.Note, com.evernote.edam.type.LinkedNotebook)
 	 */
-	Note createNote(Note note, LinkedNotebook linkedNotebook)
-			throws EvernoteException;
+	Note createNote(Note note, LinkedNotebook linkedNotebook) throws EvernoteException;
 
 	/**
-	 * Helper method to list linked notebooks
+	 * Equivalent to {@link com.evernote.clients.LinkedNoteStoreClient#listNotebooks()}.
 	 *
-	 * @see {@link com.evernote.edam.notestore.NoteStore.Client#listLinkedNotebooks(String)}
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.LinkedNoteStoreClient#listNotebooks()
 	 */
 	List<LinkedNotebook> listNotebooks() throws EvernoteException;
 
 	/**
-	 * Will return the {@link com.evernote.edam.type.Notebook} associated with the
-	 * {@link com.evernote.edam.type.LinkedNotebook} from the linked account
+	 * Equivalent to {@link com.evernote.clients.LinkedNoteStoreClient#getCorrespondingNotebook(com.evernote.edam.type.LinkedNotebook)}.
 	 *
-	 * @param linkedNotebook
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.LinkedNoteStoreClient#getCorrespondingNotebook(com.evernote.edam.type.LinkedNotebook)
 	 */
 	Notebook getCorrespondingNotebook(LinkedNotebook linkedNotebook) throws EvernoteException;
 
 	/**
-	 * Checks writable permissions of {@link LinkedNotebook} on Linked account
+	 * Equivalent to {@link com.evernote.clients.LinkedNoteStoreClient#isNotebookWritable(com.evernote.edam.type.LinkedNotebook)} ()}.
 	 *
-	 * @param linkedNotebook
+	 * @throws EvernoteException converted unchecked exception
+	 * @see com.evernote.clients.LinkedNoteStoreClient#isNotebookWritable(com.evernote.edam.type.LinkedNotebook)
 	 */
 	boolean isNotebookWritable(LinkedNotebook linkedNotebook) throws EvernoteException;
 

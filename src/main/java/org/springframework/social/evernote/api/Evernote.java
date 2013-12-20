@@ -5,17 +5,53 @@ import com.evernote.edam.type.LinkedNotebook;
 import org.springframework.social.ApiBinding;
 
 /**
+ * Interface specifying basic set of operations to evernote.
+ * <p/>
+ * This interface provides spring-social-evernote's core API for features, such as:
+ * <ul>
+ * <li>Interface based programming model</li>
+ * <li>Unchecked exception</li>
+ * <li>null-safe thrift collections</li>
+ * </ul>
+ * <p/>
+ * Implemented by {@link org.springframework.social.evernote.api.Impl.EvernoteTemplate}.
+ *
  * @author Tadaya Tsuyukubo
  */
 public interface Evernote extends ApiBinding {
 
-	BusinessNoteStoreOperations businessNoteStoreOperations();
+	/**
+	 * API for performing operations on {@link BusinessNoteStoreClient}.
+	 *
+	 * @return operations for {@link BusinessNoteStoreClient}.
+	 * @throws EvernoteException converted unchecked exception.
+	 */
+	BusinessNoteStoreOperations businessNoteStoreOperations() throws EvernoteException;
 
-	LinkedNoteStoreOperations linkedNoteStoreOperations(LinkedNotebook linkedNotebook);
+	/**
+	 * API for performing operations on {@link LinkedNoteStoreOperations}.
+	 *
+	 * @param linkedNotebook
+	 * @return operations for {@link LinkedNoteStoreOperations}.
+	 * @throws EvernoteException converted unchecked exception.
+	 */
+	LinkedNoteStoreOperations linkedNoteStoreOperations(LinkedNotebook linkedNotebook) throws EvernoteException;
 
-	NoteStoreOperations noteStoreOperations();
+	/**
+	 * API for performing operations on {@link NoteStoreOperations}.
+	 *
+	 * @return operations for {@link NoteStoreOperations}.
+	 * @throws EvernoteException converted unchecked exception.
+	 */
+	NoteStoreOperations noteStoreOperations() throws EvernoteException;
 
-	UserStoreOperations userStoreOperations();
+	/**
+	 * API for performing operations on {@link UserStoreOperations}.
+	 *
+	 * @return operations for {@link UserStoreOperations}.
+	 * @throws EvernoteException converted unchecked exception.
+	 */
+	UserStoreOperations userStoreOperations() throws EvernoteException;
 
 
 	/**
