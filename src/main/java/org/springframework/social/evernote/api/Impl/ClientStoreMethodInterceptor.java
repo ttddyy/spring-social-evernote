@@ -37,7 +37,17 @@ public class ClientStoreMethodInterceptor implements MethodInterceptor {
 		ReflectionUtils.makeAccessible(targetMethod);
 
 		try {
-			return ReflectionUtils.invokeMethod(targetMethod, target, invocation.getArguments());
+			final Object result = ReflectionUtils.invokeMethod(targetMethod, target, invocation.getArguments());
+
+			// to call other chained advices, it has to proceed the invocation.
+			try {
+				// since invocation.getThis() == store client, invocation.getMethod() == ~Operations class's method
+				// this proceed() should fail due to incompatible method invocation.
+				invocation.proceed();  // for just triggering other chained advices
+			} catch (Throwable throwable) {
+			}
+
+			return result;
 		} catch (Exception e) {
 			// retrieve original exception.
 			// ReflectionUtils wraps checked exception to UndeclaredThrowableException.

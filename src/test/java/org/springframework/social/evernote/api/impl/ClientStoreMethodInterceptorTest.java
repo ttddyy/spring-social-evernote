@@ -2,17 +2,22 @@ package org.springframework.social.evernote.api.impl;
 
 import com.evernote.clients.UserStoreClient;
 import com.evernote.edam.type.User;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.social.evernote.api.Impl.ClientStoreMethodInterceptor;
 import org.springframework.social.evernote.api.StoreClientHolder;
+import org.springframework.social.evernote.api.UserStoreOperations;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -63,5 +68,34 @@ public class ClientStoreMethodInterceptorTest {
 		assertThat(result, is(instanceOf(UserStoreClient.class)));
 		assertThat((UserStoreClient) result, is(sameInstance(client)));
 
+	}
+
+	private interface Foo {
+		String echo();
+	}
+
+	private class Bar {
+		public String echo() {
+			return "bar";
+		}
+	}
+
+	@Test
+	public void testInterceptorChain() throws Throwable {
+		MethodInterceptor stubAdvice = mock(MethodInterceptor.class);
+		when(stubAdvice.invoke(argThat(any(MethodInvocation.class)))).thenReturn("modified");
+
+		Bar bar = new Bar();
+
+		ProxyFactory proxyFactory = new ProxyFactory(bar);
+		proxyFactory.addInterface(Foo.class);
+		proxyFactory.addAdvice(new ClientStoreMethodInterceptor());
+		proxyFactory.addAdvice(stubAdvice);
+		Foo foo = (Foo) proxyFactory.getProxy();
+
+		String result = foo.echo();
+
+		verify(stubAdvice).invoke(argThat(any(MethodInvocation.class)));
+		assertThat(result, is("bar"));  // even though stub advice has called, the stub result should be ignored.
 	}
 }
