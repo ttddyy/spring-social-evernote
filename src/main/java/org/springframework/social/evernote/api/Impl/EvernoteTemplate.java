@@ -113,8 +113,8 @@ public class EvernoteTemplate implements Evernote {
 		ProxyFactory proxyFactory = new ProxyFactory(storeClient);
 		proxyFactory.addInterface(operationClass);
 		proxyFactory.addInterface(StoreClientHolder.class);
-		proxyFactory.addAdvice(new ClientStoreMethodInterceptor());
-		proxyFactory.addAdvice(new ThriftWrapperInterceptor());
+		proxyFactory.addAdvice(0, new ThriftWrapperInterceptor());
+		proxyFactory.addAdvice(1, new ClientStoreMethodInterceptor());
 		return (T) proxyFactory.getProxy();
 	}
 

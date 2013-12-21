@@ -18,9 +18,6 @@ import org.springframework.social.evernote.api.LinkedNoteStoreOperations;
 import org.springframework.social.evernote.api.NoteStoreOperations;
 import org.springframework.social.evernote.api.UserStoreOperations;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -44,11 +41,9 @@ public class EvernoteTemplateOpertaionsTest {
 		BusinessNoteStoreOperations result = spy.businessNoteStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
-		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
-
-		assertThat(advisorClasses, hasSize(2));
-		assertThat(advisorClasses, hasItem(ClientStoreMethodInterceptor.class));
-		assertThat(advisorClasses, hasItem(ThriftWrapperInterceptor.class));
+		assertThat(advisors, arrayWithSize(2));  // order is important
+		assertThat(advisors[0].getAdvice(), is(instanceOf(ThriftWrapperInterceptor.class)));
+		assertThat(advisors[1].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
 	}
 
 	@Test
@@ -62,11 +57,9 @@ public class EvernoteTemplateOpertaionsTest {
 		LinkedNoteStoreOperations result = spy.linkedNoteStoreOperations(mock(LinkedNotebook.class));
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
-		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
-
-		assertThat(advisorClasses, hasSize(2));
-		assertThat(advisorClasses, hasItem(ClientStoreMethodInterceptor.class));
-		assertThat(advisorClasses, hasItem(ThriftWrapperInterceptor.class));
+		assertThat(advisors, arrayWithSize(2));  // order is important
+		assertThat(advisors[0].getAdvice(), is(instanceOf(ThriftWrapperInterceptor.class)));
+		assertThat(advisors[1].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
 	}
 
 	@Test
@@ -80,11 +73,9 @@ public class EvernoteTemplateOpertaionsTest {
 		NoteStoreOperations result = spy.noteStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
-		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
-
-		assertThat(advisorClasses, hasSize(2));
-		assertThat(advisorClasses, hasItem(ClientStoreMethodInterceptor.class));
-		assertThat(advisorClasses, hasItem(ThriftWrapperInterceptor.class));
+		assertThat(advisors, arrayWithSize(2));  // order is important
+		assertThat(advisors[0].getAdvice(), is(instanceOf(ThriftWrapperInterceptor.class)));
+		assertThat(advisors[1].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
 	}
 
 	@Test
@@ -98,19 +89,9 @@ public class EvernoteTemplateOpertaionsTest {
 		UserStoreOperations result = spy.userStoreOperations();
 		assertThat(AopUtils.isAopProxy(result), is(true));
 		Advisor[] advisors = ((Advised) result).getAdvisors();
-		Set<Class<?>> advisorClasses = getAdviceClasses(advisors);
-
-		assertThat(advisorClasses, hasSize(2));
-		assertThat(advisorClasses, hasItem(ClientStoreMethodInterceptor.class));
-		assertThat(advisorClasses, hasItem(ThriftWrapperInterceptor.class));
-	}
-
-	private Set<Class<?>> getAdviceClasses(Advisor[] advisors) {
-		Set<Class<?>> advisorClasses = new HashSet<Class<?>>();
-		for (Advisor advisor : advisors) {
-			advisorClasses.add(advisor.getAdvice().getClass());
-		}
-		return advisorClasses;
+		assertThat(advisors, arrayWithSize(2));  // order is important
+		assertThat(advisors[0].getAdvice(), is(instanceOf(ThriftWrapperInterceptor.class)));
+		assertThat(advisors[1].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
 	}
 
 }
