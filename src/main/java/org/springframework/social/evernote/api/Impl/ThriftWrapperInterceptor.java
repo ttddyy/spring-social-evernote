@@ -11,6 +11,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class ThriftWrapperInterceptor implements MethodInterceptor {
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		return ThriftWrapper.makeNullSafe(invocation.proceed());
+		final Object result = invocation.proceed();  // can be AfterAdvice
+		return ThriftWrapper.makeNullSafe(result);
 	}
 }
