@@ -75,6 +75,22 @@ public class ThriftWrapper {
 						ReflectionUtils.setField(field, source, new HashMap<Object, Object>());
 						createProxy = true;
 					}
+				} else {
+					// check values in collection
+					if (isList) {
+						for (Object o : ((Iterable<?>) value)) {
+							Collections.replaceAll((List<Object>) value, o, makeNullSafe(o));
+						}
+					} else if (isSet) {
+						final Set<Object> set = (Set<Object>) value;
+						final List<Object> elements = new ArrayList<Object>(set.size());
+						for (Object o : ((Iterable<?>) value)) {
+							elements.add(makeNullSafe(o));
+						}
+						set.clear();
+						set.addAll(elements);
+					}
+					// check map values??
 				}
 			}
 
