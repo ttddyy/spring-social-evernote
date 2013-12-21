@@ -221,4 +221,10 @@ public class ThriftWrapperTest {
 		assertThat(newFoo.getOptionalMap().size(), is(0));
 
 	}
+
+	@Test
+	public void testNull() {
+		Object result = makeNullSafe(null);
+		assertThat(result, is(nullValue()));
+	}
 }

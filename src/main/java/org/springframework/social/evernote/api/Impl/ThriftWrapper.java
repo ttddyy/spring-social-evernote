@@ -28,6 +28,10 @@ public class ThriftWrapper {
 	 */
 	public static <T> T makeNullSafe(final T source) {
 
+		if (source == null) {
+			return null;  // null is null...
+		}
+
 		final Class<?> sourceClass = source.getClass();
 		final Set<Field> initiallyNullListFields = new HashSet<Field>();
 		final Set<Field> initiallyNullSetFields = new HashSet<Field>();
