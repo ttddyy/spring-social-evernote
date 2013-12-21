@@ -37,7 +37,7 @@ public class ThriftWrapper {
 		final Set<Field> initiallyNullSetFields = new HashSet<Field>();
 		final Set<Field> initiallyNullMapFields = new HashSet<Field>();
 
-		boolean containsCollection = false;
+		boolean createProxy = false;
 		for (Field field : sourceClass.getDeclaredFields()) {
 
 			if (Modifier.isStatic(field.getModifiers())) {
@@ -61,24 +61,26 @@ public class ThriftWrapper {
 					ReflectionUtils.setField(field, source, makeNullSafe(value));  // recursively call wrap method.
 				}
 			} else if (isCollection) {
-				containsCollection = true;
 				if (value == null) {
 					if (isList) {
 						initiallyNullListFields.add(field);
 						ReflectionUtils.setField(field, source, new ArrayList<Object>());
+						createProxy = true;
 					} else if (isSet) {
 						initiallyNullSetFields.add(field);
 						ReflectionUtils.setField(field, source, new HashSet<Object>());
+						createProxy = true;
 					} else {
 						initiallyNullMapFields.add(field);
 						ReflectionUtils.setField(field, source, new HashMap<Object, Object>());
+						createProxy = true;
 					}
 				}
 			}
 
 		}
 
-		if (!containsCollection) {
+		if (!createProxy) {
 			return source;  // doesn't make proxy
 		}
 
