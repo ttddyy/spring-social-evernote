@@ -37,7 +37,6 @@ public class ThriftWrapper {
 		final Set<Field> initiallyNullSetFields = new HashSet<Field>();
 		final Set<Field> initiallyNullMapFields = new HashSet<Field>();
 
-		boolean createProxy = false;
 		for (Field field : sourceClass.getDeclaredFields()) {
 
 			if (Modifier.isStatic(field.getModifiers())) {
@@ -65,15 +64,12 @@ public class ThriftWrapper {
 					if (isList) {
 						initiallyNullListFields.add(field);
 						ReflectionUtils.setField(field, source, new ArrayList<Object>());
-						createProxy = true;
 					} else if (isSet) {
 						initiallyNullSetFields.add(field);
 						ReflectionUtils.setField(field, source, new HashSet<Object>());
-						createProxy = true;
 					} else {
 						initiallyNullMapFields.add(field);
 						ReflectionUtils.setField(field, source, new HashMap<Object, Object>());
-						createProxy = true;
 					}
 				} else {
 					// check values in collection
@@ -96,7 +92,9 @@ public class ThriftWrapper {
 
 		}
 
-		if (!createProxy) {
+		final boolean noNullCollectionField = initiallyNullListFields.isEmpty() &&
+				initiallyNullSetFields.isEmpty() && initiallyNullMapFields.isEmpty();
+		if (noNullCollectionField) {
 			return source;  // doesn't make proxy
 		}
 
