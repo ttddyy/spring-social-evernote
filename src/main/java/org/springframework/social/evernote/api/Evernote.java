@@ -29,26 +29,26 @@ public interface Evernote extends ApiBinding {
 	BusinessNoteStoreOperations businessNoteStoreOperations() throws EvernoteException;
 
 	/**
-	 * API for performing operations on {@link LinkedNoteStoreOperations}.
+	 * API for performing operations on {@link LinkedNoteStoreClient}.
 	 *
 	 * @param linkedNotebook
-	 * @return operations for {@link LinkedNoteStoreOperations}.
+	 * @return operations for {@link LinkedNoteStoreClient}.
 	 * @throws EvernoteException converted unchecked exception.
 	 */
 	LinkedNoteStoreOperations linkedNoteStoreOperations(LinkedNotebook linkedNotebook) throws EvernoteException;
 
 	/**
-	 * API for performing operations on {@link NoteStoreOperations}.
+	 * API for performing operations on {@link NoteStoreClient}.
 	 *
-	 * @return operations for {@link NoteStoreOperations}.
+	 * @return operations for {@link NoteStoreClient}.
 	 * @throws EvernoteException converted unchecked exception.
 	 */
 	NoteStoreOperations noteStoreOperations() throws EvernoteException;
 
 	/**
-	 * API for performing operations on {@link UserStoreOperations}.
+	 * API for performing operations on {@link UserStoreClient}.
 	 *
-	 * @return operations for {@link UserStoreOperations}.
+	 * @return operations for {@link UserStoreClient}.
 	 * @throws EvernoteException converted unchecked exception.
 	 */
 	UserStoreOperations userStoreOperations() throws EvernoteException;
