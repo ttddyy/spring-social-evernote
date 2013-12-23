@@ -3,6 +3,6 @@ package org.springframework.social.evernote.api;
 /**
  * @author Tadaya Tsuyukubo
  */
-public interface StoreClientHolder<T> {
-	T getStoreClient();
+public interface StoreClientHolder {
+	<T> T getStoreClient();
 }
