@@ -5,6 +5,7 @@ package org.springframework.social.evernote.api.impl;
  */
 
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -125,5 +126,9 @@ public class ThriftWrapper {
 	 * Marker interface for ThriftWrapper created proxy.
 	 */
 	public static interface ThriftWrapperProxyMarker {
+	}
+
+	public static boolean isNullSafeProxy(Object target) {
+		return AopUtils.isAopProxy(target) && target instanceof ThriftWrapperProxyMarker;
 	}
 }

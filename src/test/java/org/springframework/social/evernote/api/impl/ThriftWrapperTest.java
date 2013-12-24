@@ -5,6 +5,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TMemoryBuffer;
 import org.apache.thrift.transport.TTransport;
 import org.junit.Test;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.social.evernote.api.impl.entity.Bar;
 import org.springframework.social.evernote.api.impl.entity.Baz;
@@ -246,5 +247,20 @@ public class ThriftWrapperTest {
 		assertThat(wrapped.getBar(), is(instanceOf(ThriftWrapper.ThriftWrapperProxyMarker.class)));
 		assertThat(AopUtils.isAopProxy(wrapped.getBar().getBaz()), is(true));
 		assertThat(wrapped.getBar().getBaz(), is(instanceOf(ThriftWrapper.ThriftWrapperProxyMarker.class)));
+	}
+
+	@Test
+	public void testIsNullSafeProxy() {
+		Foo foo = new Foo("foo", new ArrayList<String>(), new HashSet<String>(), new HashMap<String, String>());
+		assertThat(ThriftWrapper.isNullSafeProxy(foo), is(false));
+
+		Foo wrapped = makeNullSafe(foo);  // wrap
+		assertThat(ThriftWrapper.isNullSafeProxy(wrapped), is(true));
+
+		// proxy but not by ThriftWrapper
+		ProxyFactory proxyFactory = new ProxyFactory(foo);
+		proxyFactory.setProxyTargetClass(true); // force cglib
+		Foo proxy = (Foo) proxyFactory.getProxy();
+		assertThat(ThriftWrapper.isNullSafeProxy(proxy), is(false));
 	}
 }
