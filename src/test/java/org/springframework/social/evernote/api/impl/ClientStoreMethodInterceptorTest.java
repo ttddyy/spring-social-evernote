@@ -6,9 +6,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.social.evernote.api.Impl.ClientStoreMethodInterceptor;
 import org.springframework.social.evernote.api.StoreClientHolder;
-import org.springframework.social.evernote.api.UserStoreOperations;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;

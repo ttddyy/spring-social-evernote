@@ -14,7 +14,7 @@ import org.springframework.social.ApiBinding;
  * <li>null-safe thrift collections</li>
  * </ul>
  * <p/>
- * Implemented by {@link org.springframework.social.evernote.api.Impl.EvernoteTemplate}.
+ * Implemented by {@link org.springframework.social.evernote.api.impl.EvernoteTemplate}.
  *
  * @author Tadaya Tsuyukubo
  */
@@ -111,7 +111,7 @@ public interface Evernote extends ApiBinding {
 	 * <p/>
 	 * Default is true.
 	 *
-	 * @param applyNullSafe set false to disable {@link org.springframework.social.evernote.api.Impl.ThriftWrapper}
+	 * @param applyNullSafe set false to disable {@link org.springframework.social.evernote.api.impl.ThriftWrapper}
 	 */
 	void setApplyNullSafe(boolean applyNullSafe);
 

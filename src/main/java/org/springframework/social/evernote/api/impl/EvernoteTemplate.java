@@ -1,4 +1,4 @@
-package org.springframework.social.evernote.api.Impl;
+package org.springframework.social.evernote.api.impl;
 
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;

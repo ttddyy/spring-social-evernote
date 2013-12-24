@@ -2,7 +2,6 @@ package org.springframework.social.evernote.api.impl;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
-import org.springframework.social.evernote.api.Impl.ThriftWrapperInterceptor;
 
 import static org.mockito.Mockito.*;
 

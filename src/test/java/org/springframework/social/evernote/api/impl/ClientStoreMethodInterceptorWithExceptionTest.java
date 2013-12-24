@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.springframework.social.evernote.api.EvernoteException;
-import org.springframework.social.evernote.api.Impl.ClientStoreMethodInterceptor;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;

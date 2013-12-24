@@ -2,7 +2,7 @@ package org.springframework.social.evernote.connect;
 
 import com.evernote.auth.EvernoteService;
 import org.springframework.social.evernote.api.Evernote;
-import org.springframework.social.evernote.api.Impl.EvernoteTemplate;
+import org.springframework.social.evernote.api.impl.EvernoteTemplate;
 import org.springframework.social.oauth1.AbstractOAuth1ServiceProvider;
 
 /**

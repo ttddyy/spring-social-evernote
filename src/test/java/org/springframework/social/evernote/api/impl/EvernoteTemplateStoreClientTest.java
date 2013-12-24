@@ -7,7 +7,6 @@ import com.evernote.edam.type.LinkedNotebook;
 import com.evernote.thrift.transport.TTransportException;
 import org.junit.Test;
 import org.springframework.social.evernote.api.EvernoteException;
-import org.springframework.social.evernote.api.Impl.EvernoteTemplate;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;

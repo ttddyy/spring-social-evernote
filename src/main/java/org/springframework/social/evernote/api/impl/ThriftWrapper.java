@@ -1,4 +1,4 @@
-package org.springframework.social.evernote.api.Impl;
+package org.springframework.social.evernote.api.impl;
 
 /**
  * @author Tadaya Tsuyukubo

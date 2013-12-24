@@ -14,7 +14,7 @@ import org.springframework.cglib.proxy.Callback;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.Factory;
 import org.springframework.cglib.proxy.MethodProxy;
-import org.springframework.social.evernote.api.Impl.ClientStoreMethodInterceptor;
+import org.springframework.social.evernote.api.impl.ClientStoreMethodInterceptor;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Array;

@@ -6,7 +6,7 @@ import java.util.*;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.springframework.social.evernote.api.Impl.ThriftWrapper.makeNullSafe;
+import static org.springframework.social.evernote.api.impl.ThriftWrapper.makeNullSafe;
 
 /**
  * @author Tadaya Tsuyukubo

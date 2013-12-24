@@ -1,22 +1,13 @@
 package org.springframework.social.evernote.api.impl;
 
-import org.apache.thrift.protocol.TJSONProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TMemoryBuffer;
-import org.apache.thrift.transport.TTransport;
 import org.junit.Test;
-import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.social.evernote.api.impl.entity.Bar;
-import org.springframework.social.evernote.api.impl.entity.Baz;
-import org.springframework.social.evernote.api.impl.entity.Foo;
-import org.springframework.util.ReflectionUtils;
 
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.springframework.social.evernote.api.Impl.ThriftWrapper.makeNullSafe;
+import static org.springframework.social.evernote.api.impl.ThriftWrapper.makeNullSafe;
 
 /**
  * @author Tadaya Tsuyukubo
