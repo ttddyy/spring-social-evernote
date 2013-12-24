@@ -7,6 +7,7 @@ import java.util.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.social.evernote.api.impl.ThriftWrapper.makeNullSafe;
+import static org.springframework.social.evernote.api.impl.ThriftWrapper.unwrap;
 
 /**
  * @author Tadaya Tsuyukubo
@@ -52,22 +53,36 @@ public class ThriftWrapperCollectionFieldTest {
 		holder.set = internalSet;
 
 
-		CollectionHolder result = makeNullSafe(holder);
-		assertThat(result.getCollection(), hasSize(1));
-		assertThat(result.getList(), hasSize(1));
-		assertThat(result.getSet(), hasSize(1));
+		CollectionHolder wrapped = makeNullSafe(holder);
+		assertThat(wrapped.getCollection(), hasSize(1));
+		assertThat(wrapped.getList(), hasSize(1));
+		assertThat(wrapped.getSet(), hasSize(1));
 
-		CollectionHolder elementCollection = result.getCollection().iterator().next();
-		CollectionHolder elementList = result.getList().iterator().next();
-		CollectionHolder elementSet = result.getSet().iterator().next();
+		CollectionHolder elementInCollection = wrapped.getCollection().iterator().next();
+		CollectionHolder elementInList = wrapped.getList().iterator().next();
+		CollectionHolder elementInSet = wrapped.getSet().iterator().next();
 
-		assertThat(elementCollection.getCollection(), is(notNullValue()));
-		assertThat(elementCollection.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
+		assertThat(elementInCollection.getCollection(), is(notNullValue()));
+		assertThat(elementInCollection.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
 
-		assertThat(elementList.getCollection(), is(notNullValue()));
-		assertThat(elementList.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
+		assertThat(elementInList.getCollection(), is(notNullValue()));
+		assertThat(elementInList.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
 
-		assertThat(elementSet.getCollection(), is(notNullValue()));
-		assertThat(elementSet.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
+		assertThat(elementInSet.getCollection(), is(notNullValue()));
+		assertThat(elementInSet.getCollection(), is(emptyCollectionOf(CollectionHolder.class)));
+
+		// unwrapped
+		CollectionHolder unwrapped = unwrap(wrapped);
+		assertThat(unwrapped.getCollection(), hasSize(1));
+		assertThat(unwrapped.getList(), hasSize(1));
+		assertThat(unwrapped.getSet(), hasSize(1));
+
+		CollectionHolder elementInUnwrappedCollection = unwrapped.getCollection().iterator().next();
+		CollectionHolder elementInUnwrappedList = unwrapped.getList().iterator().next();
+		CollectionHolder elementInUnwrappedSet = unwrapped.getSet().iterator().next();
+
+		assertThat(elementInUnwrappedCollection.getCollection(), is(nullValue()));
+		assertThat(elementInUnwrappedList.getCollection(), is(nullValue()));
+		assertThat(elementInUnwrappedSet.getCollection(), is(nullValue()));
 	}
 }
