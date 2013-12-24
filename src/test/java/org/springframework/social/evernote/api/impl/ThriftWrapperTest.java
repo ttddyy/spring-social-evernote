@@ -5,6 +5,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TMemoryBuffer;
 import org.apache.thrift.transport.TTransport;
 import org.junit.Test;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.social.evernote.api.impl.entity.Bar;
 import org.springframework.social.evernote.api.impl.entity.Baz;
 import org.springframework.social.evernote.api.impl.entity.Foo;
@@ -226,5 +227,24 @@ public class ThriftWrapperTest {
 	public void testNull() {
 		Object result = makeNullSafe(null);
 		assertThat(result, is(nullValue()));
+	}
+
+	@Test
+	public void testThriftWrapperProxyMarker() {
+		Foo foo = new Foo("foo", new ArrayList<String>(), new HashSet<String>(), new HashMap<String, String>());
+		Bar bar = new Bar();
+		Baz baz = new Baz();
+		bar.setName("bar");
+		baz.setName("baz");
+		bar.setBaz(baz);
+		foo.setBar(bar);
+
+		Foo wrapped = makeNullSafe(foo);  // wrap
+		assertThat(AopUtils.isAopProxy(wrapped), is(true));
+		assertThat(wrapped, is(instanceOf(ThriftWrapper.ThriftWrapperProxyMarker.class)));
+		assertThat(AopUtils.isAopProxy(wrapped.getBar()), is(true));
+		assertThat(wrapped.getBar(), is(instanceOf(ThriftWrapper.ThriftWrapperProxyMarker.class)));
+		assertThat(AopUtils.isAopProxy(wrapped.getBar().getBaz()), is(true));
+		assertThat(wrapped.getBar().getBaz(), is(instanceOf(ThriftWrapper.ThriftWrapperProxyMarker.class)));
 	}
 }

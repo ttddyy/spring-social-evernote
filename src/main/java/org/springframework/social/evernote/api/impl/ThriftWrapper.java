@@ -105,6 +105,7 @@ public class ThriftWrapper {
 		// make proxy
 		ProxyFactory proxyFactory = new ProxyFactory(source);
 		proxyFactory.setProxyTargetClass(true); // aka. use cglib for non-interface source
+		proxyFactory.addInterface(ThriftWrapperProxyMarker.class);  // add marker interface
 		proxyFactory.addAdvice(interceptor);
 		return (T) proxyFactory.getProxy();
 
@@ -120,5 +121,9 @@ public class ThriftWrapper {
 		return false;
 	}
 
-
+	/**
+	 * Marker interface for ThriftWrapper created proxy.
+	 */
+	public static interface ThriftWrapperProxyMarker {
+	}
 }
