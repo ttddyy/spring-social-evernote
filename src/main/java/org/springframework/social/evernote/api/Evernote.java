@@ -105,4 +105,14 @@ public interface Evernote extends ApiBinding {
 	 */
 	UserStoreClient userStoreClient() throws EvernoteException;
 
+
+	/**
+	 * Set to false not to make a proxy for thrift object for null safe collections.
+	 * <p/>
+	 * Default is true.
+	 *
+	 * @param applyNullSafe set false to disable {@link org.springframework.social.evernote.api.Impl.ThriftWrapper}
+	 */
+	void setApplyNullSafe(boolean applyNullSafe);
+
 }

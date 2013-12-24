@@ -94,4 +94,21 @@ public class EvernoteTemplateOpertaionsTest {
 		assertThat(advisors[1].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
 	}
 
+
+	@Test
+	public void testMakeNullSafe() throws Exception {
+		NoteStoreClient noteStoreClient = mock(NoteStoreClient.class);
+
+		EvernoteTemplate template = new EvernoteTemplate(EvernoteService.SANDBOX, "token");
+		EvernoteTemplate spy = spy(template);  // partial mock
+		doReturn(noteStoreClient).when(spy).noteStoreClient();
+
+		spy.setApplyNullSafe(false);  // disable null-safe-collection
+
+		NoteStoreOperations result = spy.noteStoreOperations();
+		assertThat(AopUtils.isAopProxy(result), is(true));
+		Advisor[] advisors = ((Advised) result).getAdvisors();
+		assertThat(advisors, arrayWithSize(1));  //no ThriftWrapper
+		assertThat(advisors[0].getAdvice(), is(instanceOf(ClientStoreMethodInterceptor.class)));
+	}
 }

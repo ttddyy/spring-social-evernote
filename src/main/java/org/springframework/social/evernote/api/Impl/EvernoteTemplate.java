@@ -18,6 +18,7 @@ import static org.springframework.social.evernote.api.EvernoteExceptionUtils.Ope
 public class EvernoteTemplate implements Evernote {
 	private EvernoteService evernoteService;
 	private ClientFactory clientFactory;
+	private boolean applyNullSafe = true;
 
 	public EvernoteTemplate(EvernoteService evernoteService, String accessToken) {
 		this.evernoteService = evernoteService;
@@ -113,8 +114,11 @@ public class EvernoteTemplate implements Evernote {
 		ProxyFactory proxyFactory = new ProxyFactory(storeClient);
 		proxyFactory.addInterface(operationClass);
 		proxyFactory.addInterface(StoreClientHolder.class);
-		proxyFactory.addAdvice(0, new ThriftWrapperInterceptor());
-		proxyFactory.addAdvice(1, new ClientStoreMethodInterceptor());
+		if (this.applyNullSafe) {
+			// when registering, this interceptor has to be before ClientStoreMethodInterceptor
+			proxyFactory.addAdvice(new ThriftWrapperInterceptor());
+		}
+		proxyFactory.addAdvice(new ClientStoreMethodInterceptor());
 		return (T) proxyFactory.getProxy();
 	}
 
@@ -122,4 +126,10 @@ public class EvernoteTemplate implements Evernote {
 	public boolean isAuthorized() {
 		return true;
 	}
+
+	@Override
+	public void setApplyNullSafe(boolean applyNullSafe) {
+		this.applyNullSafe = applyNullSafe;
+	}
+
 }
