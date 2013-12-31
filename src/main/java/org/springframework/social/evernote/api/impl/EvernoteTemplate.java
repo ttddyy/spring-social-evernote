@@ -26,6 +26,20 @@ public class EvernoteTemplate implements Evernote {
 		this.clientFactory = new ClientFactory(evernoteAuth);
 	}
 
+	public EvernoteTemplate(EvernoteService evernoteService, String token, String noteStoreUrl, String webApiUrlPrefix, String userId) {
+		this(evernoteService, token, noteStoreUrl, webApiUrlPrefix, Integer.parseInt(userId));
+	}
+
+	public EvernoteTemplate(EvernoteService evernoteService, String token, String noteStoreUrl, String webApiUrlPrefix, int userId) {
+		this(evernoteService,
+				new EvernoteOAuthToken.EvernoteOAuthTokenBuilder()
+						.setToken(token)
+						.setEdamNoteStoreUrl(noteStoreUrl)
+						.setEdamWebApiUrlPrefix(webApiUrlPrefix)
+						.setEdamUserId(String.valueOf(userId))
+						.build());
+	}
+
 	public EvernoteTemplate(EvernoteService evernoteService, EvernoteOAuthToken accessToken) {
 
 		int userId = 0;
