@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Tadaya Tsuyukubo
  */
-public interface LinkedNoteStoreOperations {
+public interface LinkedNoteStoreOperations extends StoreOperations {
 
 	NoteStoreClient getClient();
 

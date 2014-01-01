@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Tadaya Tsuyukubo
  */
-public interface NoteStoreOperations {
+public interface NoteStoreOperations extends StoreOperations {
 
 	/**
 	 * If direct access to the Note Store is needed, all of these calls are

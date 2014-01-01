@@ -11,7 +11,7 @@ import com.evernote.edam.userstore.PublicUserInfo;
  *
  * @author Tadaya Tsuyukubo
  */
-public interface UserStoreOperations {
+public interface UserStoreOperations extends StoreOperations {
 
 	/**
 	 * Equivalent to {@link com.evernote.clients.UserStoreClient#isBusinessUser()}.
