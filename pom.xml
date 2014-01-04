@@ -8,7 +8,28 @@
     <packaging>jar</packaging>
 
     <name>spring-social-evernote</name>
-    <url>http://maven.apache.org</url>
+    <description>Spring Social provider module for evernote.</description>
+    <url>https://github.com/ttddyy/spring-social-evernote/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <scm>
+        <connection>scm:git:git@github.com:ttddyy/spring-social-evernote.git</connection>
+        <developerConnection>scm:git:git@github.com:ttddyy/spring-social-evernote.git</developerConnection>
+        <url>git@github.com:ttddyy/spring-social-evernote.git</url>
+    </scm>
 
     <developers>
         <developer>
