@@ -24,31 +24,45 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
 
 ## documentation
 
-https://github.com/ttddyy/spring-social-evernote/wiki/About
+- [Spring Social Evernote Reference](https://github.com/ttddyy/spring-social-evernote/wiki/About)
+- [Javddoc](https://github.com/ttddyy/spring-social-evernote/wiki/Javadoc)
 
 ## library versions
 
-- spring-social: 1.1.0.BUILD-SNAPSHOT
-- evernote-sdk-java: 1.25.1
+| spring-social-evernote | spring-social | evernote-sdk-java |                    note |
+| ----------------------:| -------------:| -----------------:| ----------------------- | 
+|                  1.0.0 |      1.1.0.M4 |            1.25.1 | *works fine with spring4 |
 
 ## how to get
 
-Once major version is released, it will be available in maven central.
 
-For now:
-
+```xml
+<dependency>
+  <groupId>net.ttddyy</groupId>
+  <artifactId>spring-social-evernote</artifactId>
+  <version>1.0.0</version>
+</dependency>
 ```
-$ git clone https://github.com/ttddyy/spring-social-evernote.git
-$ cd spring-social-evernote
-$ mvn install
+
+* Currently `spring-social-evernote` has dependency on `spring-social-core-1.1.0.M4`. 
+By maven's transitive dependency mechanism, the jar file is downloaded from spring's milestone repository since `pom.xml` in `spring-social-evernote` specifies milestone repository.
+Hoewver, if you want `mvn dependency:sources` to download all sources.jar or javdoc.jar, your project pom file needs to specify milestone repository explicitly.
+
+```xml
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 ```
 
 
 # development
-
-## status
-
-working on implementation.
 
 ## continuous integration
 
