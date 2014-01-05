@@ -17,13 +17,14 @@ import static org.springframework.social.evernote.api.EvernoteExceptionUtils.Ope
  */
 public class EvernoteTemplate implements Evernote {
 	private EvernoteService evernoteService;
+	private EvernoteAuth evernoteAuth;
 	private ClientFactory clientFactory;
 	private boolean applyNullSafe = true;
 
 	public EvernoteTemplate(EvernoteService evernoteService, String accessToken) {
 		this.evernoteService = evernoteService;
-		EvernoteAuth evernoteAuth = new EvernoteAuth(evernoteService, accessToken);
-		this.clientFactory = new ClientFactory(evernoteAuth);
+		this.evernoteAuth = new EvernoteAuth(evernoteService, accessToken);
+		this.clientFactory = new ClientFactory(this.evernoteAuth);
 	}
 
 	public EvernoteTemplate(EvernoteService evernoteService, String token, String noteStoreUrl, String webApiUrlPrefix, String userId) {
@@ -47,10 +48,10 @@ public class EvernoteTemplate implements Evernote {
 			userId = Integer.parseInt(accessToken.getEdamUserId());
 		} catch (NumberFormatException e) {
 		}
-		EvernoteAuth evernoteAuth = new EvernoteAuth(this.evernoteService, accessToken.getValue(), accessToken.getEdamNoteStoreUrl(), accessToken.getEdamWebApiUrlPrefix(), userId);
+		this.evernoteAuth = new EvernoteAuth(this.evernoteService, accessToken.getValue(), accessToken.getEdamNoteStoreUrl(), accessToken.getEdamWebApiUrlPrefix(), userId);
 
 		this.evernoteService = evernoteService;
-		this.clientFactory = new ClientFactory(evernoteAuth);
+		this.clientFactory = new ClientFactory(this.evernoteAuth);
 	}
 
 	@Override
@@ -146,4 +147,15 @@ public class EvernoteTemplate implements Evernote {
 		this.applyNullSafe = applyNullSafe;
 	}
 
+	public EvernoteService getEvernoteService() {
+		return evernoteService;
+	}
+
+	public EvernoteAuth getEvernoteAuth() {
+		return evernoteAuth;
+	}
+
+	public boolean isApplyNullSafe() {
+		return applyNullSafe;
+	}
 }
