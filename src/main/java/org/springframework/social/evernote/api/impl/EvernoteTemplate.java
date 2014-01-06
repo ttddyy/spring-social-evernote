@@ -48,7 +48,7 @@ public class EvernoteTemplate implements Evernote {
 			userId = Integer.parseInt(accessToken.getEdamUserId());
 		} catch (NumberFormatException e) {
 		}
-		this.evernoteAuth = new EvernoteAuth(this.evernoteService, accessToken.getValue(), accessToken.getEdamNoteStoreUrl(), accessToken.getEdamWebApiUrlPrefix(), userId);
+		this.evernoteAuth = new EvernoteAuth(evernoteService, accessToken.getValue(), accessToken.getEdamNoteStoreUrl(), accessToken.getEdamWebApiUrlPrefix(), userId);
 
 		this.evernoteService = evernoteService;
 		this.clientFactory = new ClientFactory(this.evernoteAuth);
