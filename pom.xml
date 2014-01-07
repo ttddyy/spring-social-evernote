@@ -3,7 +3,7 @@
 
     <groupId>net.ttddyy</groupId>
     <artifactId>spring-social-evernote</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>spring-social-evernote</name>
