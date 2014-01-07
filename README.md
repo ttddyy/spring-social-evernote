@@ -29,19 +29,19 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
 
 ## library versions
 
-| spring-social-evernote | spring-social | evernote-sdk-java |                    note |
-| ----------------------:| -------------:| -----------------:| ----------------------- | 
-|                  1.0.0 |      1.1.0.M4 |            1.25.1 | *works fine with spring4 |
+| spring-social-evernote | spring-social | evernote-sdk-java |                     note |
+| ----------------------:| -------------:| -----------------:| ------------------------ | 
+|           1.0.0, 1.0.1 |      1.1.0.M4 |            1.25.1 | *works fine with spring4 |
 
 ## how to get
 
 
 ```xml
-<dependency>
-  <groupId>net.ttddyy</groupId>
-  <artifactId>spring-social-evernote</artifactId>
-  <version>1.0.0</version>
-</dependency>
+  <dependency>
+      <groupId>net.ttddyy</groupId>
+      <artifactId>spring-social-evernote</artifactId>
+      <version>1.0.1</version>
+  </dependency>
 ```
 
 * Currently `spring-social-evernote` has dependency on `spring-social-core-1.1.0.M4`. 
