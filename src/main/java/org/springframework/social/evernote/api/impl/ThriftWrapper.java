@@ -133,11 +133,11 @@ public class ThriftWrapper {
 			final ThriftNullSafeCollectionInterceptor interceptor = (ThriftNullSafeCollectionInterceptor) advisors[0].getAdvice();
 
 			// when initially null and still empty collection, then set back null
-			final List<Field> initiallyNullcollectionFields = new ArrayList<Field>();
-			initiallyNullcollectionFields.addAll(interceptor.getInitiallyNullListFields());
-			initiallyNullcollectionFields.addAll(interceptor.getInitiallyNullSetFields());
+			final List<Field> initiallyNullCollectionFields = new ArrayList<Field>();
+			initiallyNullCollectionFields.addAll(interceptor.getInitiallyNullListFields());
+			initiallyNullCollectionFields.addAll(interceptor.getInitiallyNullSetFields());
 
-			for (Field listField : initiallyNullcollectionFields) {
+			for (Field listField : initiallyNullCollectionFields) {
 				ReflectionUtils.makeAccessible(listField);
 				Object fieldValue = ReflectionUtils.getField(listField, source);
 				if (fieldValue != null && ((Collection<?>) fieldValue).isEmpty()) {
