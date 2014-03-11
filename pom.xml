@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-core</artifactId>
-            <version>1.1.0.M4</version>
+            <version>1.1.0.RC1</version>
         </dependency>
         <dependency>
             <groupId>com.evernote</groupId>
@@ -120,6 +120,18 @@
             <artifactId>libthrift</artifactId>
             <version>0.9.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3.2</version>
+            <scope>scope</scope>
         </dependency>
 
     </dependencies>
