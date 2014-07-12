@@ -132,7 +132,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.3.2</version>
-            <scope>scope</scope>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
