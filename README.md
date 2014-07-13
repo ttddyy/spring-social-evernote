@@ -42,11 +42,13 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
   <dependency>
       <groupId>net.ttddyy</groupId>
       <artifactId>spring-social-evernote</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
   </dependency>
 ```
 
-* Currently `spring-social-evernote` has dependency on `spring-social-core-1.1.0.M4`. 
+### for version 1.0.0 and 1.0.1
+
+Both versions have dependency to `spring-social-core-1.1.0.M4`.   
 By maven's transitive dependency mechanism, the jar file is downloaded from spring's milestone repository since `pom.xml` in `spring-social-evernote` specifies milestone repository.
 Hoewver, if you want `mvn dependency:sources` to download all sources.jar or javdoc.jar, your project pom file needs to specify milestone repository explicitly.
 
@@ -63,6 +65,7 @@ Hoewver, if you want `mvn dependency:sources` to download all sources.jar or jav
     </repositories>
 ```
 
+* Since version 1.0.2 uses release version of spring-social, this milestone configuration is not necessary. 
 
 # development
 
