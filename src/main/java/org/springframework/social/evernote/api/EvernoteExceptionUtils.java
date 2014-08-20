@@ -17,26 +17,30 @@ public class EvernoteExceptionUtils {
 	 */
 	public static EvernoteException convert(Exception ex) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(ex.getMessage());
+		sb.append(ex.getClass().getName());
 		if (ex instanceof EDAMUserException) {
 			sb.append(", ErrorCode [");
 			sb.append(((EDAMUserException) ex).getErrorCode());
 			sb.append("], Parameter [");
 			sb.append(((EDAMUserException) ex).getParameter());
 			sb.append("]");
-		}
-		if (ex instanceof EDAMSystemException) {
+		} else if (ex instanceof EDAMSystemException) {
 			sb.append(", ErrorCode [");
 			sb.append(((EDAMSystemException) ex).getErrorCode());
+			sb.append("], Message [");
+			sb.append(((EDAMSystemException) ex).getMessage());
 			sb.append("], RateLimitDuration [");
 			sb.append(((EDAMSystemException) ex).getRateLimitDuration());
 			sb.append("]");
-		}
-		if (ex instanceof EDAMNotFoundException) {
+		} else if (ex instanceof EDAMNotFoundException) {
 			sb.append(", Identifier [");
 			sb.append(((EDAMNotFoundException) ex).getIdentifier());
 			sb.append("], Key [");
 			sb.append(((EDAMNotFoundException) ex).getKey());
+			sb.append("]");
+		} else {
+			sb.append(", Message [");
+			sb.append(ex.getMessage());
 			sb.append("]");
 		}
 		return new EvernoteException(sb.toString(), ex);
