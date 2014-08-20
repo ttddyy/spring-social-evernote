@@ -1,5 +1,6 @@
 package org.springframework.social.evernote.api;
 
+import com.evernote.edam.error.EDAMErrorCode;
 import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
@@ -16,17 +17,26 @@ public class EvernoteExceptionUtils {
 	 * @return converted exception
 	 */
 	public static EvernoteException convert(Exception ex) {
-		StringBuilder sb = new StringBuilder();
+		// construct exception message
+		final StringBuilder sb = new StringBuilder();
 		sb.append(ex.getClass().getName());
 		if (ex instanceof EDAMUserException) {
-			sb.append(", ErrorCode [");
-			sb.append(((EDAMUserException) ex).getErrorCode());
+			final EDAMErrorCode errorCode = ((EDAMUserException) ex).getErrorCode();
+			if (errorCode == null) {
+				sb.append(", ErrorCode [null");
+			} else {
+				sb.append(", ErrorCode [" + errorCode + "(" + errorCode.getValue() + ")");
+			}
 			sb.append("], Parameter [");
 			sb.append(((EDAMUserException) ex).getParameter());
 			sb.append("]");
 		} else if (ex instanceof EDAMSystemException) {
-			sb.append(", ErrorCode [");
-			sb.append(((EDAMSystemException) ex).getErrorCode());
+			final EDAMErrorCode errorCode = ((EDAMSystemException) ex).getErrorCode();
+			if (errorCode == null) {
+				sb.append(", ErrorCode [null");
+			} else {
+				sb.append(", ErrorCode [" + errorCode + "(" + errorCode.getValue() + ")");
+			}
 			sb.append("], Message [");
 			sb.append(((EDAMSystemException) ex).getMessage());
 			sb.append("], RateLimitDuration [");

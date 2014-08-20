@@ -44,12 +44,25 @@ public class EvernoteExceptionUtilsConvertGetMessageTest {
 
 		RuntimeException runtimeException = new RuntimeException("RUNTIME_EXCEPTION_MESSAGE");
 
+		// with null error code
+		EDAMUserException edamUserExceptionWithNullErrorCode = new EDAMUserException();
+		edamUserExceptionWithNullErrorCode.setErrorCode(null);
+		edamUserExceptionWithNullErrorCode.setParameter("NULL_PARAM");
+
+		EDAMSystemException edamSystemExceptionWithNullErrorCode = new EDAMSystemException();
+		edamSystemExceptionWithNullErrorCode.setErrorCode(null);
+		edamSystemExceptionWithNullErrorCode.setMessage("NULL_MESSAGE");
+		edamSystemExceptionWithNullErrorCode.setRateLimitDuration(88);
+
 		return Arrays.asList(new Object[][]{
-				{edamUserException, "com.evernote.edam.error.EDAMUserException, ErrorCode [AUTH_EXPIRED], Parameter [PARAM]"},
-				{edamSystemException, "com.evernote.edam.error.EDAMSystemException, ErrorCode [BAD_DATA_FORMAT], Message [MESSAGE], RateLimitDuration [99]"},
+				{edamUserException, "com.evernote.edam.error.EDAMUserException, ErrorCode [AUTH_EXPIRED(9)], Parameter [PARAM]"},
+				{edamSystemException, "com.evernote.edam.error.EDAMSystemException, ErrorCode [BAD_DATA_FORMAT(2)], Message [MESSAGE], RateLimitDuration [99]"},
 				{edamNotFoundException, "com.evernote.edam.error.EDAMNotFoundException, Identifier [IDENTIFIER], Key [KEY]"},
 				{tException, "com.evernote.thrift.TException, Message [TEXCEPTION_MESSAGE]"},
 				{runtimeException, "java.lang.RuntimeException, Message [RUNTIME_EXCEPTION_MESSAGE]"},
+
+				{edamUserExceptionWithNullErrorCode, "com.evernote.edam.error.EDAMUserException, ErrorCode [null], Parameter [NULL_PARAM]"},
+				{edamSystemExceptionWithNullErrorCode, "com.evernote.edam.error.EDAMSystemException, ErrorCode [null], Message [NULL_MESSAGE], RateLimitDuration [88]"},
 		});
 	}
 
