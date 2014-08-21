@@ -33,6 +33,15 @@ public class EvernoteException extends RuntimeException {
 		return getCause() instanceof TException;
 	}
 
+	/**
+	 * True if exception is one of {@link EDAMUserException}, {@link EDAMSystemException}, or {@link EDAMNotFoundException}
+	 *
+	 * @return true when thrown exception is one of EDAM*Exception.
+	 */
+	public boolean isEDAMException() {
+		return isEDAMUserException() || isEDAMSystemException() || isEDAMNotFoundException();
+	}
+
 	public EDAMErrorCode getEDAMErrorCode() {
 		if (isEDAMUserException()) {
 			return ((EDAMUserException) getCause()).getErrorCode();

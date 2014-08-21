@@ -1,13 +1,15 @@
 package org.springframework.social.evernote.api;
 
 import com.evernote.edam.error.EDAMErrorCode;
+import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
+import com.evernote.thrift.TException;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,5 +34,24 @@ public class EvernoteExceptionTest {
 		ex = new EvernoteException("", new RuntimeException());
 		assertThat(ex.getEDAMErrorCode(), is(nullValue()));
 
+	}
+
+	@Test
+	public void testIsEdamException() {
+		EvernoteException ex = new EvernoteException("", new EDAMUserException());
+		assertTrue(ex.isEDAMException());
+
+		ex = new EvernoteException("", new EDAMSystemException());
+		assertTrue(ex.isEDAMException());
+
+		ex = new EvernoteException("", new EDAMNotFoundException());
+		assertTrue(ex.isEDAMException());
+
+
+		ex = new EvernoteException("", new TException());
+		assertFalse(ex.isEDAMException());
+
+		ex = new EvernoteException("", new RuntimeException());
+		assertFalse(ex.isEDAMException());
 	}
 }
