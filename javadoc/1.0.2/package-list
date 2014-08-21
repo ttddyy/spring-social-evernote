@@ -1,0 +1,3 @@
+org.springframework.social.evernote.api
+org.springframework.social.evernote.api.impl
+org.springframework.social.evernote.connect
