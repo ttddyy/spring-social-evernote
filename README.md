@@ -32,7 +32,7 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
 | spring-social-evernote | spring-social | evernote-sdk-java |                     note |
 | ----------------------:| -------------:| -----------------:| ------------------------ | 
 |           1.0.0, 1.0.1 |      1.1.0.M4 |            1.25.1 | *works fine with spring4 |
-|                  1.0.2 | 1.1.0.RELEASE |            1.25.1 |                          |
+|           1.0.2, 1.0.3 | 1.1.0.RELEASE |            1.25.1 |                          |
 |               SNAPSHOT | 1.1.0.RELEASE |            1.25.1 |                          |
 
 ## how to get
@@ -42,7 +42,7 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
   <dependency>
       <groupId>net.ttddyy</groupId>
       <artifactId>spring-social-evernote</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
   </dependency>
 ```
 
