@@ -1,4 +1,4 @@
-## 1.0.3 (TBD)
+## 1.0.3 (2014-08-20)
 
 - improve error message
 
