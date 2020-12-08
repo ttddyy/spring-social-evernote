@@ -3,14 +3,14 @@
 Spring Social provider module for Evernote API.
 
 Spring Social Evernote provides `EvernoteConnectionFactory`, a connection factory implementation for Evernote. This enables 'Connect Framework' from Spring Social to handle OAuth authentication process (and connection persistence) with Evernote.  
-Not only the connect framework support, Spring Social Evernote provides rich programming model founded by spring framework on top of the [evernote-sdk-java](https://github.com/evernote/evernote-sdk-java/), a thrift based java sdk provided by evernote. 
+Not only the connect framework support, Spring Social Evernote provides rich programming model founded by Spring Framework on top of the [evernote-sdk-java](https://github.com/evernote/evernote-sdk-java/), a thrift based Java SDK provided by Evernote. 
 
 
 # key features
 
 - Service provider implementation for Evernote OAuth
 
-- More  java friendly programming model
+- More Java friendly programming model
 
  - Interface based programming for store clients
 
@@ -19,13 +19,13 @@ Not only the connect framework support, Spring Social Evernote provides rich pro
  - Null safe collection for thrift based domain object
 
 
-Please reference the [documentation](https://github.com/ttddyy/spring-social-evernote/wiki/About) and implementation for details.
+Please refer to the [documentation](https://github.com/ttddyy/spring-social-evernote/wiki/About) and implementation for details.
 
 
 ## documentation
 
 - [Spring Social Evernote Reference](https://github.com/ttddyy/spring-social-evernote/wiki/About)
-- [Javddoc](https://github.com/ttddyy/spring-social-evernote/wiki/Javadoc)
+- [Javadoc](https://github.com/ttddyy/spring-social-evernote/wiki/Javadoc)
 
 ## library versions
 
@@ -50,7 +50,7 @@ Please reference the [documentation](https://github.com/ttddyy/spring-social-eve
 
 Both versions have dependency to `spring-social-core-1.1.0.M4`.   
 By maven's transitive dependency mechanism, the jar file is downloaded from spring's milestone repository since `pom.xml` in `spring-social-evernote` specifies milestone repository.
-Hoewver, if you want `mvn dependency:sources` to download all sources.jar or javdoc.jar, your project pom file needs to specify milestone repository explicitly.
+However, if you want `mvn dependency:sources` to download all sources.jar or javadoc.jar, your project pom file needs to specify the milestone repository explicitly.
 
 ```xml
     <repositories>
