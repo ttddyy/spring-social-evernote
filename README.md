@@ -1,3 +1,6 @@
+### NOTE: This project is no longer actively maintained.
+----
+
 # spring-social-evernote
 
 Spring Social provider module for Evernote API.
